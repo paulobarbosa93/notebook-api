@@ -46,6 +46,6 @@ class KindsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def kind_params
-      params.require(:kind).permit(:description)
+      params.require(:kind).permit(:description, contacts_attributes: %i[id name email birthdate])
     end
 end
