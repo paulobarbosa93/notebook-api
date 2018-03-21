@@ -6,11 +6,9 @@ class Contact < ApplicationRecord
     "Jackson Pires"
   end
 
-  def as_json(options={})
-    super(
-      methods: :author,
-      root: true,
-      include: { kind: { only: :description } }
-    )
+  def as_json(options = {})
+    h = super(options)
+    h[:birthdate] = (I18n.l(self.birthdate) unless self.birthdate.blank?)
+    h
   end
 end
