@@ -5,6 +5,10 @@ class ContactSerializer < ActiveModel::Serializer
   has_many :phones
   has_one :address
 
+  meta do
+    { author: "Paulo Barbosa" }
+  end
+
   def attributes(*args)
     h = super(*args)
     # h[:birthdate] = (I18n.l(object.birthdate) unless object.birthdate.blank?)
