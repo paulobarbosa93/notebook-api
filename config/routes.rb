@@ -10,4 +10,6 @@ Rails.application.routes.draw do
     resource :address, only: [:show, :update, :create, :destroy]
     resource :address, only: [:show, :update, :create, :destroy], path: 'relationships/address'
   end
+
+  post 'orders', to: 'orders#create'
 end
