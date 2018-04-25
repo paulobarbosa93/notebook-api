@@ -1,13 +1,13 @@
 class PhonesController < ApplicationController
-  before_action :set_phones
+  before_action :set_contact
 
-  def index
-    render json: @phones
+  def show
+    render json: @contact.phones
   end
-
+  
   private
 
-  def set_phones
-    @phones = Contact.find(params[:contact_id]).phones
+  def set_contact
+    @contact = Contact.find(params[:contact_id])
   end
 end
