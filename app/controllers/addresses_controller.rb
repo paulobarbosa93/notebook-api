@@ -10,9 +10,9 @@ class AddressesController < ApplicationController
   def create
     @contact.address = Address.new(address_params)
     if @contact.save
-      render json: @contact.address, status: :created
+      render json: @contact.address, status: :created, location: contact_address_url(@contact)
     else
-      render json: @contact.address.errors.full_messages, status: :unprocessable_entity, location: contact_address_url(@contact)
+      render json: @contact.address.errors.full_messages, status: :unprocessable_entity
     end
   end
 
