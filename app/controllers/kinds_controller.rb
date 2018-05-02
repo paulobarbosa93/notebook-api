@@ -1,5 +1,8 @@
 class KindsController < ApplicationController
+  include ActionController::HttpAuthentication::Basic::ControllerMethods
+
   before_action :set_kind, only: [:show, :update, :destroy]
+  http_basic_authenticate_with name: "paulo", password: "secret"
 
   # GET /kinds
   def index
