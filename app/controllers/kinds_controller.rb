@@ -1,8 +1,14 @@
 class KindsController < ApplicationController
-  include ActionController::HttpAuthentication::Basic::ControllerMethods
+  TOKEN = "secret"
 
+  # include ActionController::HttpAuthentication::Basic::ControllerMethods
+  # http_basic_authenticate_with name: "paulo", password: "secret"
+
+  include ActionController::HttpAuthentication::Token::ControllerMethods
+
+  before_action :authenticate
   before_action :set_kind, only: [:show, :update, :destroy]
-  http_basic_authenticate_with name: "paulo", password: "secret"
+
 
   # GET /kinds
   def index
@@ -42,6 +48,14 @@ class KindsController < ApplicationController
   end
 
   private
+
+    def authenticate
+      authenticate_or_request_with_http_token do |token, options|
+        # Compare the tokens in a time-constant manner, to mitigate
+        # timing attacks.
+        ActiveSupport::SecurityUtils.secure_compare(token, TOKEN)
+      end
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_kind
       if params[:contact_id]
