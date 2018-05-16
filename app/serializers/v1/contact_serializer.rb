@@ -14,9 +14,8 @@ module V1
       link(:related) { v1_contact_address_url(object) }
     end
 
-
     meta do
-      { author: "Paulo Barbosa" }
+      { author: 'Paulo Barbosa' }
     end
 
     def attributes(*args)
