@@ -9,6 +9,8 @@ module V1
       page_number = params[:page].try(:[], :number)
       per_page = params[:page].try(:[], :size)
       @contacts = Contact.all.page(page_number).per(per_page)
+
+      # Cache-control ---- expires_in 30.seconds, public: true
       render json: @contacts
     end
 
